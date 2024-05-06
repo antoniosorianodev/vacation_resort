@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Stay</title>
+</head>
+
+<body>
+    <h1>Book Your Stay</h1>
+    <form>
+        <!-- I could give this a type="text", but that's the default value so it's not necessary -->
+        <label for="fullName">Full Name:</label>
+        <input id="fullName" required>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" required>
+        <label for="checkInDate">Check-In Date:</label>
+        <input type="date" id="checkInDate" required>
+        <label for="queen">Number of Nights:</label>
+        <input type="Number" id="numberOfNights" min="1" max="28" required>
+        <h4>Room Type:</h4>
+        <section id="roomTypeSection">
+            <input type="radio" name="roomType" id="queen" required>
+            <label for="queen">Queen</label>
+            <input type="radio" name="roomType" id="king">
+            <label for="king">King</label>
+            <input type="radio" name="roomType" id="twoBedroom">
+            <label for="twoBedroom">Two Bedroom Suite</label>
+        </section>
+        <label for="numberOfAdults">Number of Adults:</label>
+        <input type="number" id="numberOfAdults" required>
+        <label for="numberOfAdults">Number of Children:</label>
+        <input type="number" id="numberOfChildren" required>
+        <h4>Discounts:</h4>
+        <section id="discountSection">
+            <input type="radio" name="discounts" id="noDiscount" required>
+            <label for="noDiscount">None</label>
+            <input type="radio" name="discounts" id="seniorDiscount">
+            <label for="seniorDiscount">AAA/Senior</label>
+            <input type="radio" name="discounts" id="militaryDiscount">
+            <label for="militaryDiscount">Military</label>
+        </section>
+        <button id="submitBookYourStay">Submit</button>
+    </form>
+</body>
+
+</html>
