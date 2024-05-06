@@ -9,7 +9,7 @@
 
 <body>
     <h1>Book Your Stay</h1>
-    <form>
+    <form id="bookYourStayForm">
         <!-- I could give this a type="text", but that's the default value so it's not necessary -->
         <label for="fullName">Full Name:</label>
         <input id="fullName" required>
@@ -29,9 +29,9 @@
             <label for="twoBedroom">Two Bedroom Suite</label>
         </section>
         <label for="numberOfAdults">Number of Adults:</label>
-        <input type="number" id="numberOfAdults" required>
+        <input type="number" id="numberOfAdults" name="numberOfAdults" required>
         <label for="numberOfAdults">Number of Children:</label>
-        <input type="number" id="numberOfChildren" required>
+        <input type="number" id="numberOfChildren" name="numberOfChildren" required>
         <h4>Discounts:</h4>
         <section id="discountSection">
             <input type="radio" name="discounts" id="noDiscount" required>
@@ -43,6 +43,8 @@
         </section>
         <button id="submitBookYourStay">Submit</button>
     </form>
+    <div id="message"></div>
+    <script src="./scripts/bookYourStay.js"></script>
 </body>
 
 </html>
