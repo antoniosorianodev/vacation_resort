@@ -38,19 +38,21 @@ function bookYourStay(event) {
     let numOfNights = Number(document.querySelector("#numberOfNights").value);
     console.log(`No of nights: ${numOfNights}`);
 
+    let roomRate = getRoomRate(startDate, typeOfRoom);
     let costOfStay = numOfNights * getRoomRate(startDate, typeOfRoom);
+    let discountedRoomRate = roomRate * (1 - (getDiscountRate()));
     let discountAmount = costOfStay * (getDiscountRate());
 
     // Tax rate of 12%
+    let taxAmount = (costOfStay - discountAmount) * 0.12;
     let totalAfterTax = (costOfStay - discountAmount) * 1.12;
 
     document.querySelector("#message").innerHTML = `
-    <p>At a start date of: ${startDate}</p>
-    <p>At a number of nights of: ${numOfNights}</p>
-    <p>Room type of: ${typeOfRoom}</p>
-    <p>Subtotal: $  ${costOfStay}</p>
-    <p>Discount: -$${discountAmount}</p>
-    <p>Total: $${totalAfterTax}</p>
+    <p>Orignal Room Cost: $${roomRate.toFixed(2)} </p>
+    <p>Discount: -$${discountAmount.toFixed(2)}</p>
+    <p>Discounted Room Cost: $${discountedRoomRate.toFixed(2)}</p>
+    <p>Tax Amount: $${taxAmount.toFixed(2)}</p>
+    <p>Total: $${totalAfterTax.toFixed(2)}</p>
     `
 }
 
@@ -102,16 +104,19 @@ function occupancyLogic(adults, kids, roomType) {
     if (roomType === "queen") {
         if (totalGuests > 5) {
             alert(`The room type "Queen" has a max occupancy limit of 5`);
+            document.querySelector("#message").innerHTML = "<p>The room you selected will not hold your party</p>"
             message = "quit";
         }
     } else if (roomType === "king") {
         if (totalGuests > 2) {
             alert(`The room type "King" has a max occupancy limit of 2`);
+            document.querySelector("#message").innerHTML = "<p>The room you selected will not hold your party</p>"
             message = "quit";
         }
     } else if (roomType === "two") {
         if (totalGuests > 6) {
             alert(`The room type "Two Bedroom Suite" has a max occupancy limit of 6`);
+            document.querySelector("#message").innerHTML = "<p>The room you selected will not hold your party</p>"
             message = "quit";
         }
     }
