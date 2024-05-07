@@ -36,23 +36,22 @@ function bookYourStay(event) {
     }
 
     let numOfNights = Number(document.querySelector("#numberOfNights").value);
-    console.log(`No of nights: ${numOfNights}`);
 
     let roomRate = getRoomRate(startDate, typeOfRoom);
-    let costOfStay = numOfNights * getRoomRate(startDate, typeOfRoom);
     let discountedRoomRate = roomRate * (1 - (getDiscountRate()));
-    let discountAmount = costOfStay * (getDiscountRate());
+    let discountAmount = roomRate - discountedRoomRate;
+    let subtotal = numOfNights * discountedRoomRate;
 
     // Tax rate of 12%
-    let taxAmount = (costOfStay - discountAmount) * 0.12;
-    let totalAfterTax = (costOfStay - discountAmount) * 1.12;
+    let taxAmount = (subtotal) * 0.12;
+    let total = subtotal + taxAmount;
 
     document.querySelector("#message").innerHTML = `
     <p>Orignal Room Cost: $${roomRate.toFixed(2)} </p>
     <p>Discount: -$${discountAmount.toFixed(2)}</p>
     <p>Discounted Room Cost: $${discountedRoomRate.toFixed(2)}</p>
     <p>Tax Amount: $${taxAmount.toFixed(2)}</p>
-    <p>Total: $${totalAfterTax.toFixed(2)}</p>
+    <p>Total: $${total.toFixed(2)}</p>
     `
 }
 
@@ -77,19 +76,19 @@ function getRoomRate(date, roomType) {
     console.log(month);
 
     if (roomType === "queen") {
-        if (month === 5 || month === 6 || month === 7) {
+        if (month === 6 || month === 7 || month === 8) {
             costPerNight = 250;
         } else {
             costPerNight = 150;
         }
     } else if (roomType === "king") {
-        if (month === 5 || month === 6 || month === 7) {
+        if (month === 6 || month === 7 || month === 8) {
             costPerNight = 250;
         } else {
             costPerNight = 150;
         }
     } else if (roomType === "two") {
-        if (month === 5 || month === 6 || month === 7) {
+        if (month === 6 || month === 7 || month === 8) {
             costPerNight = 350;
         } else {
             costPerNight = 210;
