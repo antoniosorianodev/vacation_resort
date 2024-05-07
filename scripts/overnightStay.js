@@ -24,12 +24,13 @@ function overnightStay(event) {
         typeOfRoom = "two";
     }
 
+    let fullName = theForm.fullName.value;
     let adults = Number(theForm.numberOfAdults.value);
     let children = Number(theForm.numberOfChildren.value);
 
-    // occupancyLogic runs it's code, does alerts if needed, and will return a value
+    // getGuestCount runs it's code, does alerts if needed, and will return a value
     // depending on the value I receive, I can tell overnightStay to not run the rest of its code
-    let handler = occupancyLogic(adults, children, typeOfRoom);
+    let handler = getGuestCount(adults, children, typeOfRoom);
 
     if (handler === "quit") {
         return;
@@ -52,6 +53,8 @@ function overnightStay(event) {
     <p>Discounted Room Cost: $${discountedRoomRate.toFixed(2)}</p>
     <p>Tax Amount: $${taxAmount.toFixed(2)}</p>
     <p>Total: $${total.toFixed(2)}</p>
+    <p></p>
+    <p>Confirmation Number: ${getConfirmationNumber(fullName, startDate, numOfNights, adults, children)}</p>
     `
 }
 
@@ -97,7 +100,7 @@ function getRoomRate(date, roomType) {
     return (costPerNight);
 }
 
-function occupancyLogic(adults, kids, roomType) {
+function getGuestCount(adults, kids, roomType) {
     let totalGuests = adults + kids;
     let message;
     if (roomType === "queen") {
@@ -120,4 +123,32 @@ function occupancyLogic(adults, kids, roomType) {
         }
     }
     return (message);
+}
+
+function getConfirmationNumber(name, date, nights, adults, kids) {
+    // the strucure we want is "${first 3 letters of name}-MMYYYY-${numberOfNights}:${numOfAdults}:${NumOfKids}"
+    let confirmationNumber;
+
+    // this gives the first 3 letters of name, in uppercase, and a hyphen: "AAA-"
+    let trimmedName = ((name.slice(0, 3).toUpperCase()) + "-");
+
+    // this gives us the number month, as a string: "MM"
+    let month = date.slice(date.indexOf("-") + 1, date.lastIndexOf("-"));
+
+    // this gives us the number year, as a string: "YYYY"
+    let year = date.slice(0, date.indexOf("-"));
+
+    // this concatinates the month, the year, and a hyphen: "MMYYYY-"
+    let monthAndYear = month + year + "-";
+
+    // this concatinates the nights given with a colon: "someNumber:"
+    let nightsColon = nights + ":";
+
+    // this concatinates the number of adults, a colon, and the number of children: "someNumber:someOtherNumber"
+    let guests = (adults + ":" + kids)
+
+    // this puts it all together
+    confirmationNumber = trimmedName + monthAndYear + nightsColon + guests;
+
+    return (confirmationNumber);
 }
