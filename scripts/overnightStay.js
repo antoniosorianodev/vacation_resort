@@ -1,13 +1,13 @@
 "use strict"
 
 window.onload = function () {
-    let form = document.querySelector("#bookYourStayForm");
-    let submit = document.querySelector("#submitBookYourStay");
+    let form = document.querySelector("#overnightStayForm");
+    let submit = document.querySelector("#submitOvernightStay");
 
-    form.addEventListener("submit", bookYourStay);
+    form.addEventListener("submit", overnightStay);
 }
 
-function bookYourStay(event) {
+function overnightStay(event) {
     event.preventDefault();
 
     let theForm = event.target;
@@ -28,7 +28,7 @@ function bookYourStay(event) {
     let children = Number(theForm.numberOfChildren.value);
 
     // occupancyLogic runs it's code, does alerts if needed, and will return a value
-    // depending on the value I receive, I can tell bookYourStay to not run the rest of its code
+    // depending on the value I receive, I can tell overnightStay to not run the rest of its code
     let handler = occupancyLogic(adults, children, typeOfRoom);
 
     if (handler === "quit") {
